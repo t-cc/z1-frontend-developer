@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="260" height="160" version="1.1" viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg" >
+ 
+ <g id="📱-Mobile----Default" transform="translate(20.271 18.546)" fill="none" fill-rule="evenodd">
+  <g id="Scan----Empty" transform="translate(-76,-226)" fill="#f3f2f4">
+   <g id="Card-frame-/-Empty" transform="translate(58,208)">
+    <g id="ID-bg" transform="translate(18,18)">
+     <path id="Combined-Shape" d="m69 0c4.4183 0 8 3.5817 8 8v75c0 4.4183-3.5817 8-8 8h-61c-4.4183 0-8-3.5817-8-8v-75c0-4.4183 3.5817-8 8-8zm-30.5 68c-12.624 0-23.79 1.4098-33.5 4.2293v8.7707c0 2.7614 2.2386 5 5 5h57c2.7614 0 5-2.2386 5-5v-8.7707c-9.7097-2.8195-20.876-4.2293-33.5-4.2293zm0-59c-16.425 0-21.5 12.021-21.5 25s8.5213 29 21.5 29 21.5-16.021 21.5-29-5.0753-25-21.5-25z"/>
+     <rect id="Rectangle" x="92" width="125" height="10" rx="5"/>
+     <rect x="92" y="114" width="101" height="10" rx="5"/>
+     <rect y="114" width="77" height="10" rx="5"/>
+     <rect x="92" y="24" width="43" height="10" rx="5"/>
+     <rect x="92" y="58" width="77" height="10" rx="5"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
