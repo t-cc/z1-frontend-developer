@@ -25,7 +25,7 @@ export const Main: React.FC<Props> = ({
         Take a picture. It may take time to validate your personal information.
       </StyledMessage>
       <StyledImgWrapper>
-        <IdImage />
+        <IdImage image={image} />
         <TakePictureButton handleClickTakePicture={handleClickTakePicture} />
         {statusType !== STATUS_TYPE_UNKNOW && (
           <StatusButton statusText={statusText} statusType={statusType} />
