@@ -1,15 +1,15 @@
-import React from 'react';
-import IdBgDefault from '../../assets/ID_bg.svg';
-import { StyledImg } from './styles';
+import React from "react";
+import IdBgDefault from "../../assets/ID_bg.svg";
+import { StyledImg } from "./styles";
 
 interface Props {
-  image?: string
+  image?: string;
 }
 
-export const IdImage:React.FC<Props> = ({image=IdBgDefault}) => {
+export const IdImage: React.FC<Props> = ({ image = IdBgDefault }) => {
   return (
     <>
       <StyledImg src={image} />
     </>
-  )
-}
+  );
+};
