@@ -31,8 +31,6 @@ DEMO: 🚀 https://lively-sprinkles-23a32e.netlify.app/
 - [Vscode "ESLint" extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - https://www.favicon-generator.org/
 
-  This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## 🏃 Ejecución.
 
 Para la ejecución en local con `yarn start` sin conexión https es necesario deshabilitar ciertas opciones de seguridad en chrome. En caso contrario no se podrá acceder a la cámara del dispositivo.
