@@ -1,4 +1,5 @@
 import React, { RefObject } from "react";
+import { ID_CAPTURE_HEIGHT, ID_CAPTURE_WIDTH } from "../../constants/id";
 import {
   StyledBtnCancel,
   StyledCanvasWrapper,
@@ -44,7 +45,11 @@ export const CameraPreview: React.FC<Props> = ({
 
         <StyledCanvasWrapper>
           <StyledAspectRatio>
-            <StyledCanvas ref={canvasRef} />
+            <StyledCanvas
+              ref={canvasRef}
+              width={ID_CAPTURE_WIDTH}
+              height={ID_CAPTURE_HEIGHT}
+            />
           </StyledAspectRatio>
         </StyledCanvasWrapper>
         <StyledBtnCancel

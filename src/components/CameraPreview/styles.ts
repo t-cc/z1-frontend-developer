@@ -57,7 +57,7 @@ export const StyledCanvasWrapper = styled.div`
 
 export const StyledAspectRatio = styled.div`
   width: 100%;
-  padding-top: 66.66%;
+  padding-top: 60%;
   height: 0;
   position: relative;
 `;

@@ -9,6 +9,10 @@ export const StyledImg = styled.img<idImage>`
   background-color: #ffffff;
   box-shadow: 0 0.625rem 1.25rem -0.375rem rgba(0, 0, 0, 0.15);
   border: 0.125rem solid transparent;
+  width: 100%;
+  height: auto;
+  display: block;
+
   ${({ statusType }) => {
     if (statusType === STATUS_TYPE_ACCEPTED) {
       return "border-color: green;";

@@ -29,4 +29,5 @@ export const StyledImgWrapper = styled.div`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+  max-width: 80%;
 `;

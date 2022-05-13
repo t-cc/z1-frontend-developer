@@ -12,10 +12,15 @@ import {
   postResponseOkState,
 } from "../../state";
 import { sendImage } from "../../services/sendImage";
+import {
+  ID_CAPTURE_HEIGHT,
+  ID_CAPTURE_WIDTH,
+  ID_HEIGHT_RATIO,
+} from "../../constants/id";
 
 const CAPTURE_OPTIONS = {
   audio: false,
-  video: true, // { facingMode: "environment" },
+  video: { facingMode: "environment" },
 };
 
 export const TakePicture = () => {
@@ -42,7 +47,7 @@ export const TakePicture = () => {
   };
 
   useEffect(() => {
-    const takePhoto = async (capture: ImageCapture) => {
+    const displayAndCheckImage = async (capture: ImageCapture) => {
       const photo = await capture.takePhoto();
       const url = URL.createObjectURL(photo);
       const img = new Image();
@@ -50,12 +55,10 @@ export const TakePicture = () => {
 
       img.addEventListener("load", () => {
         if (canvasRef.current) {
-          const cutStartX = img.width * 0.25;
-          const cutWidth = img.width * 0.5;
-          const cutHeight = cutWidth * 1.5;
-          const cutStartY = img.height / 2 - cutHeight / 2;
-          const width = canvasRef.current.width;
-          const height = canvasRef.current.height;
+          const cutStartX = ~~img.width * 0.1;
+          const cutWidth = ~~img.width * 0.8;
+          const cutHeight = ~~cutWidth * ID_HEIGHT_RATIO;
+          const cutStartY = ~~img.height / 2 - cutHeight / 2;
           URL.revokeObjectURL(img.src);
           const context = canvasRef.current.getContext("2d");
           context?.drawImage(
@@ -66,30 +69,32 @@ export const TakePicture = () => {
             cutHeight,
             0,
             0,
-            width,
-            height
+            ID_CAPTURE_WIDTH,
+            ID_CAPTURE_HEIGHT
           );
-          const data = context?.getImageData(0, 0, width, height);
+          const data = context?.getImageData(0, 0, 200, 160);
           const [r, g, b] = getAverageRGBfromImage(data);
           if (isValidIdCardAverageColor(r, g, b)) {
             const imageData = canvasRef.current.toDataURL();
             setBlobPhoto(imageData);
             handleSubmit(imageData);
-            // setShowTakePicture(false);
           }
         }
       });
     };
 
-    const timmer = setInterval(() => {
+    const captureAndProcessImage = () => {
       if (videoRef.current?.srcObject) {
         const tracks = mediaStream?.getVideoTracks();
         if (tracks) {
           const capture = new ImageCapture(tracks[0]);
-          takePhoto(capture);
+          displayAndCheckImage(capture);
         }
       }
-    }, 1000);
+    };
+
+    captureAndProcessImage();
+    const timmer = setInterval(captureAndProcessImage, 1000);
 
     return () => {
       clearInterval(timmer);
