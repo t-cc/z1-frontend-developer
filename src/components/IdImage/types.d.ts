@@ -1,0 +1,3 @@
+type idImage = {
+  statusType: string;
+};

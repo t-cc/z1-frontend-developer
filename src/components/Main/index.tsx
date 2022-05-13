@@ -1,5 +1,9 @@
 import React from "react";
-import { STATUS_TEXT_UNKNOW, STATUS_TYPE_UNKNOW } from "../../constants/status";
+import {
+  STATUS_TYPE_ACCEPTED,
+  STATUS_TEXT_UNKNOW,
+  STATUS_TYPE_UNKNOW,
+} from "../../constants/status";
 import { IdImage } from "../IdImage";
 import { StatusButton } from "../StatusButton";
 import { TakePictureButton } from "../TakePictureButton";
@@ -25,8 +29,13 @@ export const Main: React.FC<Props> = ({
         Take a picture. It may take time to validate your personal information.
       </StyledMessage>
       <StyledImgWrapper>
-        <IdImage image={image} />
-        <TakePictureButton handleClickTakePicture={handleClickTakePicture} />
+        <IdImage image={image} statusType={statusType} />
+        {statusType !== STATUS_TYPE_ACCEPTED && (
+          <TakePictureButton
+            handleClickTakePicture={handleClickTakePicture}
+            statusType={statusType}
+          />
+        )}
         {statusType !== STATUS_TYPE_UNKNOW && (
           <StatusButton statusText={statusText} statusType={statusType} />
         )}
