@@ -5,12 +5,13 @@ import { useCamera } from "../../hooks/useCamera";
 import {
   getAverageRGBfromImage,
   isValidIdCardAverageColor,
-} from "../../services/color";
+} from "../../utils/color";
 import {
   showTakePictureState,
   blobPhotoState,
   postResponseOkState,
 } from "../../state";
+import { sendImage } from "../../services/sendImage";
 
 const CAPTURE_OPTIONS = {
   audio: false,
@@ -34,22 +35,10 @@ export const TakePicture = () => {
     videoRef.current?.play();
   }
 
-  const handleSubmit = async () => {
-    const response = await fetch(
-      "https://front-exercise.z1.digital/evaluations",
-      {
-        method: "POST",
-        body: null,
-      }
-    );
-
-    const responseJson = await response.json();
-    if (responseJson.summary && responseJson.summary.outcome) {
-      console.info(responseJson.summary.outcome);
-      setPostResponseOk(responseJson.summary.outcome === "Approved");
-      setShowTakePicture(false);
-    }
-    //
+  const handleSubmit = async (imageData: string) => {
+    const response = await sendImage(imageData);
+    setPostResponseOk(response);
+    setShowTakePicture(false);
   };
 
   useEffect(() => {
@@ -83,8 +72,9 @@ export const TakePicture = () => {
           const data = context?.getImageData(0, 0, width, height);
           const [r, g, b] = getAverageRGBfromImage(data);
           if (isValidIdCardAverageColor(r, g, b)) {
-            setBlobPhoto(canvasRef.current.toDataURL());
-            handleSubmit();
+            const imageData = canvasRef.current.toDataURL();
+            setBlobPhoto(imageData);
+            handleSubmit(imageData);
             // setShowTakePicture(false);
           }
         }
@@ -99,7 +89,7 @@ export const TakePicture = () => {
           takePhoto(capture);
         }
       }
-    }, 500);
+    }, 1000);
 
     return () => {
       clearInterval(timmer);
