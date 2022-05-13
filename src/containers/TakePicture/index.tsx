@@ -72,7 +72,12 @@ export const TakePicture = () => {
             ID_CAPTURE_WIDTH,
             ID_CAPTURE_HEIGHT
           );
-          const data = context?.getImageData(0, 0, 200, 160);
+          const data = context?.getImageData(
+            0,
+            0,
+            ID_CAPTURE_WIDTH,
+            ID_CAPTURE_HEIGHT
+          );
           const [r, g, b] = getAverageRGBfromImage(data);
           if (isValidIdCardAverageColor(r, g, b)) {
             const imageData = canvasRef.current.toDataURL();
