@@ -11,7 +11,7 @@ export function useCamera(requestedMedia: MediaStreamConstraints) {
         );
         setMediaStream(stream);
       } catch (err) {
-        // Removed for brevity
+        // @todo: How to inform the user about capture errors?
       }
     }
 

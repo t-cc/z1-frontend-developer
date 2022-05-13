@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { CameraPreview } from "../../components/CameraPreview";
-import { ID_EXPECTED_RGB_HIGH, ID_EXPECTED_RGB_LOW } from "../../constants/id";
 import { useCamera } from "../../hooks/useCamera";
+import {
+  getAverageRGBfromImage,
+  isValidIdCardAverageColor,
+} from "../../services/color";
 import {
   showTakePictureState,
   blobPhotoState,
@@ -50,38 +53,6 @@ export const TakePicture = () => {
   };
 
   useEffect(() => {
-    const getAverageRGB = (data: ImageData | undefined) => {
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      let i = 0;
-      if (data) {
-        let count = 0;
-        const blockSize = 4;
-        while ((i += blockSize * 4) < data.data.length) {
-          ++count;
-          r += data.data[i];
-          g += data.data[i + 1];
-          b += data.data[i + 2];
-        }
-        r = ~~(r / count);
-        g = ~~(g / count);
-        b = ~~(b / count);
-      }
-      return [r, g, b];
-    };
-
-    const isValidIdCardColor = (r: number, g: number, b: number) => {
-      return (
-        ID_EXPECTED_RGB_LOW.r < r &&
-        r < ID_EXPECTED_RGB_HIGH.r &&
-        ID_EXPECTED_RGB_LOW.g < g &&
-        g < ID_EXPECTED_RGB_HIGH.g &&
-        ID_EXPECTED_RGB_LOW.b < b &&
-        b < ID_EXPECTED_RGB_HIGH.b
-      );
-    };
-
     const takePhoto = async (capture: ImageCapture) => {
       const photo = await capture.takePhoto();
       const url = URL.createObjectURL(photo);
@@ -110,8 +81,8 @@ export const TakePicture = () => {
             height
           );
           const data = context?.getImageData(0, 0, width, height);
-          const [r, g, b] = getAverageRGB(data);
-          if (isValidIdCardColor(r, g, b)) {
+          const [r, g, b] = getAverageRGBfromImage(data);
+          if (isValidIdCardAverageColor(r, g, b)) {
             setBlobPhoto(canvasRef.current.toDataURL());
             handleSubmit();
             // setShowTakePicture(false);
