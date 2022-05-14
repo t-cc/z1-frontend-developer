@@ -25,6 +25,8 @@ const CAPTURE_OPTIONS = {
 };
 
 export const TakePicture = () => {
+  // Wee need this variable because the colorIsValidated only updates every render cycle
+  let processEnd = false;
   const [, setShowTakePicture] = useRecoilState(showTakePictureState);
   const [, setBlobPhoto] = useRecoilState(blobPhotoState);
   const [, setPostResponseOk] = useRecoilState(postResponseOkState);
@@ -94,23 +96,24 @@ export const TakePicture = () => {
             handleSubmit(imageData);
             setColorIsValidated(true);
             clearInterval(timmer);
+            processEnd = true;
           }
         }
       });
     };
 
-    const captureAndProcessImage = () => {
-      if (videoRef.current?.srcObject && !colorIsValidated) {
+    const captureAndProcessImage = async () => {
+      if (videoRef.current?.srcObject && !processEnd) {
         const tracks = mediaStream?.getVideoTracks();
         if (tracks) {
           const capture = new ImageCapture(tracks[0]);
-          displayAndCheckImage(capture);
+          await displayAndCheckImage(capture);
         }
       }
     };
 
     captureAndProcessImage();
-    const timmer = setInterval(captureAndProcessImage, 1000);
+    const timmer = setInterval(captureAndProcessImage, 500);
 
     return () => {
       clearInterval(timmer);
