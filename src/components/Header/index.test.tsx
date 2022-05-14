@@ -5,7 +5,7 @@ import { Header } from "./index";
 
 describe("Header", () => {
   it("renders header", () => {
-    const { container } = render(<Header />);
+    render(<Header />);
     expect(screen.getByText("BankClient")).toBeInTheDocument();
   });
 });

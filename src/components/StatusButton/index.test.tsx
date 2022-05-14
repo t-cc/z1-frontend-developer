@@ -5,9 +5,7 @@ import { StatusButton } from "./index";
 
 describe("StatusButton", () => {
   it("renders button and status text", () => {
-    const { container } = render(
-      <StatusButton statusText={"my status text"} statusType="" />
-    );
+    render(<StatusButton statusText={"my status text"} statusType="" />);
     expect(screen.getByText("my status text")).toBeInTheDocument();
   });
 });
