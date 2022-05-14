@@ -76,7 +76,7 @@ export const TakePicture = () => {
     if (videoRef.current?.srcObject) {
       startCapture();
     }
-  }, [videoRef.current?.srcObject]);
+  }, [videoRef.current?.srcObject, colorIsValidated]);
 
   return (
     <>
