@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Main } from "./index";
 
-describe("Header", () => {
+describe("Main", () => {
   it("renders texts", () => {
     render(
       <Main
