@@ -10,6 +10,7 @@ import {
   showTakePictureState,
   blobPhotoState,
   postResponseOkState,
+  colorIsValidatedState,
 } from "../../state";
 import { sendImage } from "../../services/sendImage";
 import {
@@ -27,6 +28,9 @@ export const TakePicture = () => {
   const [, setShowTakePicture] = useRecoilState(showTakePictureState);
   const [, setBlobPhoto] = useRecoilState(blobPhotoState);
   const [, setPostResponseOk] = useRecoilState(postResponseOkState);
+  const [colorIsValidated, setColorIsValidated] = useRecoilState(
+    colorIsValidatedState
+  );
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -45,6 +49,11 @@ export const TakePicture = () => {
     setPostResponseOk(response);
     setShowTakePicture(false);
   };
+
+  useEffect(() => {
+    setBlobPhoto("");
+    setColorIsValidated(false);
+  }, []);
 
   useEffect(() => {
     const displayAndCheckImage = async (capture: ImageCapture) => {
@@ -83,13 +92,15 @@ export const TakePicture = () => {
             const imageData = canvasRef.current.toDataURL();
             setBlobPhoto(imageData);
             handleSubmit(imageData);
+            setColorIsValidated(true);
+            clearInterval(timmer);
           }
         }
       });
     };
 
     const captureAndProcessImage = () => {
-      if (videoRef.current?.srcObject) {
+      if (videoRef.current?.srcObject && !colorIsValidated) {
         const tracks = mediaStream?.getVideoTracks();
         if (tracks) {
           const capture = new ImageCapture(tracks[0]);
@@ -111,6 +122,7 @@ export const TakePicture = () => {
       <CameraPreview
         videoRef={videoRef}
         canvasRef={canvasRef}
+        colorIsValidated={colorIsValidated}
         handleCanPlay={handleCanPlay}
         handleClickCancelPicture={() => {
           setShowTakePicture(false);

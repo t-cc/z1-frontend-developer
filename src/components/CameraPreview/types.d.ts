@@ -1,0 +1,3 @@
+type CanvasPreview = {
+  colorIsValidated: boolean;
+};

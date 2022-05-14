@@ -10,11 +10,14 @@ import {
   StyledAspectRatio,
   StyledCanvas,
   StyledVideoWrapper,
+  StyledOkMessage,
 } from "./styles";
+import iconCheck from "../../assets/icon-check-circle.svg";
 
 interface Props {
   videoRef: RefObject<HTMLVideoElement>;
   canvasRef: RefObject<HTMLCanvasElement>;
+  colorIsValidated: boolean;
   handleCanPlay: () => void;
   handleClickCancelPicture: () => void;
 }
@@ -22,6 +25,7 @@ interface Props {
 export const CameraPreview: React.FC<Props> = ({
   videoRef,
   canvasRef,
+  colorIsValidated,
   handleCanPlay,
   handleClickCancelPicture,
 }) => {
@@ -49,8 +53,15 @@ export const CameraPreview: React.FC<Props> = ({
               ref={canvasRef}
               width={ID_CAPTURE_WIDTH}
               height={ID_CAPTURE_HEIGHT}
+              colorIsValidated={colorIsValidated}
             />
           </StyledAspectRatio>
+          {colorIsValidated && (
+            <StyledOkMessage>
+              <img src={iconCheck} />
+              Picture taken!
+            </StyledOkMessage>
+          )}
         </StyledCanvasWrapper>
         <StyledBtnCancel
           onClick={() => {

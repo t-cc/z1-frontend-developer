@@ -46,7 +46,7 @@ export const StyledMessage = styled.div`
   letter-spacing: 0;
   line-height: 1.5rem;
   text-align: center;
-  margin-top: 3rem;
+  margin-bottom: 3rem;
   padding: 1rem;
 `;
 
@@ -62,13 +62,29 @@ export const StyledAspectRatio = styled.div`
   position: relative;
 `;
 
-export const StyledCanvas = styled.canvas`
+export const StyledCanvas = styled.canvas<CanvasPreview>`
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
   border-radius: 5%;
+  border: 0.125rem solid transparent;
+  ${({ colorIsValidated }) =>
+    colorIsValidated ? "border-color: green;" : "border-color: red;"}
+`;
+
+export const StyledOkMessage = styled.div`
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
 `;
 
 export const StyledBtnCancel = styled.button`

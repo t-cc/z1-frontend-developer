@@ -14,3 +14,8 @@ export const postResponseOkState = atom<boolean>({
   key: "postResponseOkState",
   default: undefined,
 });
+
+export const colorIsValidatedState = atom<boolean>({
+  key: "colorIsValidatedState",
+  default: false,
+});
