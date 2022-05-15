@@ -1,6 +1,6 @@
 # BankClient App
 
-App para capturar, enviar y validar fotos documentos de identidad a través de una API
+Web app to capture, send and validate identity documents photos through an API.
 
 DEMO: 🚀 https://lively-sprinkles-23a32e.netlify.app/
 
@@ -31,37 +31,38 @@ DEMO: 🚀 https://lively-sprinkles-23a32e.netlify.app/
 - [Vscode "ESLint" extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - https://www.favicon-generator.org/
 
-## 🏃 Ejecución.
+## 🏃 Execution.
 
-Para la ejecución en local con `yarn start` sin conexión https es necesario deshabilitar ciertas opciones de seguridad en chrome. En caso contrario no se podrá acceder a la cámara del dispositivo.
+To run the local dev server without `https`, we will need disable some security options in chrome. Otherwise we can't access to the device camera.
 
-1. Acceder a `chrome://flags/#unsafely-treat-insecure-origin-as-secure`.
-2. Buscar y habilitar "insecure origins treated as secure".
-3. Añadir las direcciones en las que queremos ingnorar las políticas de seguridad. Por ejemplo `localhost`.
-4. Guardar y reiniciar chrome.
+1. Go to `chrome://flags/#unsafely-treat-insecure-origin-as-secure`.
+2. Search and disable "insecure origins treated as secure".
+3. Add the addresses in which we want to ignore the security policies. For example `localhost`.
+4. Close and re-open.
 
-## ⚙️ Funcionamiento.
+## ⚙️ Operation.
 
-Inicialmente el usuario ve una pantalla con las instrucciones para iniciar la validación de su documento de identidad y un botón de acción.
+First, the user sees a screen with the instructions to start the validation of their ID document and an action button.
 
-Al pulsar el botón se inicia la captura desde la cámara. El usuario dispone de una zona en la que encuadrar su documento de identidad. La aplicación detecta automáticamente cuando se enfoca dicho documento, realiza una captura y la envía al backend.
+Pressing the button the camera capture stars. The user has an area in which to fit their document through the app. The app automatically detects when that document is focused, takes a screenshot and sends it to the back-end.
 
-Una vez enviado se vuelve a la pantalla anterior, donde se informa al usuario si la captura de su documento ha sido validada o no. En caso de resultado negativo se le ofrece la opción de volver a escanear el documento.
+After sending the document to the back-end, the app shows the previous screen, with information about whether the document has been validated by the back-end. If the answer was negative, the application displays a button to re-try the process.
 
-Internamente la aplicación calcula el color medio de la imagen capturada y lo compara con unos valores máximos y mínimos para cada canal almacenados en `constants/id.ts`.
+Internally, the app calculates the image average color, and compares it against a minimum and maximum in each color channel, stored in `constants/id.ts` .
 
-### 🌠 Rendimiento.
+### 🌠 Performance.
 
-Dado que el proceso de detección del documento se intenta realizar en tiempo real, pueden producirse problemas de rendimiento en algunos dispositivos.
+After each detection tries, we introduced a delay in milliseconds defined by the value of `ID_CHECK_PROCESS_DELAY` in `constants/id.ts`. The default value is 100. A high value can make the interface more responsive, but a worse camera visualization experience.
 
-## 👌 Alternativas y mejoras.
+## 👌 Alternatives and enhancements.
 
-En cuanto al proceso de detección, lo natural sería usar TensorFlow o una libreía similar para identificar el documento durante la captura. Desgraciadamente habría que entrenar un modelo, ya que parece no haber ninguno pre-entrenado (https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts)
+About the detection process, the best way can be run an AI assisted detection, with a library like TensorFlow. Unfortunately, there no are any pre-trained algorithm capable to detect an ID card: [https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts](https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts)
 
-Respecto a la aplicación en general.
+As for the app:
 
-- \[ ] Añadir más y mejores test.
-- \[ ] Si no se puede caturar la imagen de otra forma, mejorar el rendimiento y precisión de esta "detección por color". Seguramente se podría dividir la imagen en sectores para realizar comparaciones con las distinatas partes del documento de identidad.
-- \[ ] Mejorar la experiencia de usuario con algun mensaje cuando no se puede tener acceso a la cámara.
-- \[ ] Seleccionar automáticamente siempre la cámara adecuada.
-- \[ ] Convertir en una aplicación web progresiva que pueda iniciarse sin conexión.
+- \[ ] Include more and better test, especially in the ID card detection logic.
+- \[ ] Increase the code coverage in the test.
+- \[ ] If we unable to implement an AI detect system, enhance this rudimentary color detection. Maybe can be boosted with a quadrant division on the image, in order to compare different zones in the ID card.
+- \[ ] Better user experience, with info about possible errors, like camera exceptions and permission related problems.
+- \[ ] Adapt the app to landscape format or inform the user about the required orientation.
+- \[ ] Upgrade to a progressive web app, capable to start without internet connection.
