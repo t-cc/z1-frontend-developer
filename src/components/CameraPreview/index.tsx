@@ -13,11 +13,13 @@ import {
   StyledOkMessage,
 } from "./styles";
 import iconCheck from "../../assets/icon-check-circle.svg";
+import iconLight from "../../assets/icon-lightbulb.svg";
 
 interface Props {
   videoRef: RefObject<HTMLVideoElement>;
   canvasRef: RefObject<HTMLCanvasElement>;
   colorIsValidated: boolean;
+  colorIsTooDark: boolean;
   handleCanPlay: () => void;
   handleClickCancelPicture: () => void;
 }
@@ -26,6 +28,7 @@ export const CameraPreview: React.FC<Props> = ({
   videoRef,
   canvasRef,
   colorIsValidated,
+  colorIsTooDark,
   handleCanPlay,
   handleClickCancelPicture,
 }) => {
@@ -54,8 +57,15 @@ export const CameraPreview: React.FC<Props> = ({
               width={ID_CAPTURE_WIDTH}
               height={ID_CAPTURE_HEIGHT}
               colorIsValidated={colorIsValidated}
+              colorIsTooDark={colorIsTooDark}
             />
           </StyledAspectRatio>
+          {colorIsTooDark && (
+            <StyledOkMessage>
+              <img src={iconLight} />
+              Room lighting is too low
+            </StyledOkMessage>
+          )}
           {colorIsValidated && (
             <StyledOkMessage>
               <img src={iconCheck} />

@@ -1,4 +1,8 @@
-import { ID_EXPECTED_RGB_HIGH, ID_EXPECTED_RGB_LOW } from "../constants/id";
+import {
+  ID_EXPECTED_RGB_HIGH,
+  ID_EXPECTED_RGB_LOW,
+  ID_RBG_LIMIT_LOW_LIGHT,
+} from "../constants/id";
 
 export const getAverageRGBfromImage = (data: ImageData | undefined) => {
   let r = 0;
@@ -29,5 +33,13 @@ export const isValidIdCardAverageColor = (r: number, g: number, b: number) => {
     g < ID_EXPECTED_RGB_HIGH.g &&
     ID_EXPECTED_RGB_LOW.b < b &&
     b < ID_EXPECTED_RGB_HIGH.b
+  );
+};
+
+export const isTooDarkAverageColor = (r: number, g: number, b: number) => {
+  return (
+    ID_RBG_LIMIT_LOW_LIGHT.r > r &&
+    ID_RBG_LIMIT_LOW_LIGHT.g > g &&
+    ID_RBG_LIMIT_LOW_LIGHT.b > b
   );
 };

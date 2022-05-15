@@ -70,8 +70,12 @@ export const StyledCanvas = styled.canvas<CanvasPreview>`
   left: 0;
   border-radius: 5%;
   border: 0.125rem solid transparent;
-  ${({ colorIsValidated }) =>
-    colorIsValidated ? "border-color: green;" : "border-color: red;"}
+  ${({ colorIsValidated, colorIsTooDark }) =>
+    colorIsTooDark
+      ? "border-color: transparent;"
+      : colorIsValidated
+      ? "border-color: green;"
+      : "border-color: red;"}
 `;
 
 export const StyledOkMessage = styled.div`
@@ -84,7 +88,7 @@ export const StyledOkMessage = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
 `;
 
 export const StyledBtnCancel = styled.button`

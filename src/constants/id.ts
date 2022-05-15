@@ -1,7 +1,7 @@
 // Averge color in an spanish ID card
 export const ID_EXPECTED_RGB = { r: 160, g: 140, b: 120 };
 
-export const ID_RGB_MARGIN = 0.15;
+export const ID_RGB_MARGIN = 0.1;
 
 export const ID_EXPECTED_RGB_LOW = {
   r: ID_EXPECTED_RGB.r - ID_EXPECTED_RGB.r * ID_RGB_MARGIN,
@@ -14,6 +14,8 @@ export const ID_EXPECTED_RGB_HIGH = {
   g: ID_EXPECTED_RGB.g + ID_EXPECTED_RGB.g * ID_RGB_MARGIN,
   b: ID_EXPECTED_RGB.b + ID_EXPECTED_RGB.b * ID_RGB_MARGIN,
 };
+
+export const ID_RBG_LIMIT_LOW_LIGHT = { r: 120, g: 120, b: 120 };
 
 export const ID_CAPTURE_WIDTH = 200;
 // ID original dimensions: 85x55mm => width * 0.65 ~ height

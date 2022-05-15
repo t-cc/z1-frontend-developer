@@ -4,12 +4,16 @@ import {
   ID_CAPTURE_WIDTH,
   ID_HEIGHT_RATIO,
 } from "../constants/id";
-import { getAverageRGBfromImage, isValidIdCardAverageColor } from "./color";
+import {
+  getAverageRGBfromImage,
+  isTooDarkAverageColor,
+  isValidIdCardAverageColor,
+} from "./color";
 
 export const displayAndCheckImage = async (
   videoRef: RefObject<HTMLVideoElement>,
   canvasRef: RefObject<HTMLCanvasElement>
-) => {
+): Promise<displayAndCheckImageReturn> => {
   if (canvasRef.current && videoRef.current) {
     await videoRef.current.play();
     const context = canvasRef.current.getContext("2d");
@@ -35,9 +39,11 @@ export const displayAndCheckImage = async (
       ID_CAPTURE_HEIGHT
     );
     const [r, g, b] = getAverageRGBfromImage(data);
-    if (isValidIdCardAverageColor(r, g, b)) {
-      return canvasRef.current.toDataURL();
+    if (isTooDarkAverageColor(r, g, b)) {
+      return [null, true];
+    } else if (isValidIdCardAverageColor(r, g, b)) {
+      return [canvasRef.current.toDataURL(), false];
     }
   }
-  return null;
+  return [null, false];
 };

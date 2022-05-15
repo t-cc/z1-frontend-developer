@@ -8,6 +8,7 @@ import {
   blobPhotoState,
   postResponseOkState,
   colorIsValidatedState,
+  colorIsTooDarkState,
 } from "../../state";
 import { sendImage } from "../../services/sendImage";
 import { ID_CHECK_PROCESS_DELAY } from "../../constants/id";
@@ -24,6 +25,8 @@ export const TakePicture = () => {
   const [colorIsValidated, setColorIsValidated] = useRecoilState(
     colorIsValidatedState
   );
+  const [colorIsTooDark, setColorIsTooDark] =
+    useRecoilState(colorIsTooDarkState);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -64,7 +67,11 @@ export const TakePicture = () => {
     let reading = true;
     async function startCapture() {
       while (reading) {
-        const imageData = await displayAndCheckImage(videoRef, canvasRef);
+        const [imageData, tooDark] = await displayAndCheckImage(
+          videoRef,
+          canvasRef
+        );
+        setColorIsTooDark(tooDark);
         if (imageData) {
           setBlobPhoto(imageData);
           setColorIsValidated(true);
@@ -89,6 +96,7 @@ export const TakePicture = () => {
         videoRef={videoRef}
         canvasRef={canvasRef}
         colorIsValidated={colorIsValidated}
+        colorIsTooDark={colorIsTooDark}
         handleCanPlay={handleCanPlay}
         handleClickCancelPicture={handleClickCancel}
       />

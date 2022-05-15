@@ -19,3 +19,8 @@ export const colorIsValidatedState = atom<boolean>({
   key: "colorIsValidatedState",
   default: false,
 });
+
+export const colorIsTooDarkState = atom<boolean>({
+  key: "colorIsTooDarkState",
+  default: false,
+});
