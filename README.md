@@ -33,7 +33,7 @@ DEMO: 🚀 https://lively-sprinkles-23a32e.netlify.app/
 
 ## 🏃 Execution.
 
-To run the local dev server without `https`, we will need disable some security options in chrome. Otherwise we can't access to the device camera.
+To run the local dev server without `https`, we will need to disable some security options in chrome. Otherwise, we wil not be able to access the device camera.
 
 1. Go to `chrome://flags/#unsafely-treat-insecure-origin-as-secure`.
 2. Search and disable "insecure origins treated as secure".
@@ -44,7 +44,7 @@ To run the local dev server without `https`, we will need disable some security 
 
 First, the user sees a screen with the instructions to start the validation of their ID document and an action button.
 
-Pressing the button the camera capture stars. The user has an area in which to fit their document through the app. The app automatically detects when that document is focused, takes a screenshot and sends it to the back-end.
+Pressing the button the camera capture stars. The user will see an area where to fit their document. The app will automatically detect when the document is in focus, take a screenshot, and send it to the back-end.
 
 After sending the document to the back-end, the app shows the previous screen, with information about whether the document has been validated by the back-end. If the answer was negative, the application displays a button to re-try the process.
 
@@ -56,13 +56,13 @@ After each detection tries, we introduced a delay in milliseconds defined by the
 
 ## 👌 Alternatives and enhancements.
 
-About the detection process, the best way can be run an AI assisted detection, with a library like TensorFlow. Unfortunately, there no are any pre-trained algorithm capable to detect an ID card: [https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts](https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts)
+For the detection process, it would be best to run an AI-assisted detection, with a library such as TensorFlow. Unfortunately, there are no pre-trained algorithms capable of detecting an ID card: [https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts](https://github.com/tensorflow/tfjs-models/blob/master/coco-ssd/src/classes.ts)
 
 As for the app:
 
-- \[ ] Include more and better test, especially in the ID card detection logic.
+- \[ ] Include more and better tests, especially in the ID card detection logic.
 - \[ ] Increase the code coverage in the test.
-- \[ ] If we unable to implement an AI detect system, enhance this rudimentary color detection. Maybe can be boosted with a quadrant division on the image, in order to compare different zones in the ID card.
-- \[ ] Better user experience, with info about possible errors, like camera exceptions and permission related problems.
+- \[ ] If we are unable to implement an AI detection system, enhance this rudimentary color detection. Maybe it can be boosted with a quadrant division on the image, in order to compare different zones in the ID card.
+- \[ ] Better user experience, with information about possible errors, like camera exceptions and permission-related problems.
 - \[ ] Adapt the app to landscape format or inform the user about the required orientation.
 - \[ ] Upgrade to a progressive web app, capable to start without internet connection.
