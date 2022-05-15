@@ -12,14 +12,22 @@ import {
 } from "../../constants/status";
 import {
   blobPhotoState,
+  colorIsValidatedState,
   postResponseOkState,
   showTakePictureState,
 } from "../../state";
 
 export function ShowId() {
   const [, setShowTakePicture] = useRecoilState(showTakePictureState);
-  const [blobPhoto] = useRecoilState(blobPhotoState);
+  const [blobPhoto, setBlobPhoto] = useRecoilState(blobPhotoState);
   const [postResponseOk] = useRecoilState(postResponseOkState);
+  const [, setColorIsValidated] = useRecoilState(colorIsValidatedState);
+
+  const handleClickTakePicture = () => {
+    setBlobPhoto("");
+    setColorIsValidated(false);
+    setShowTakePicture(true);
+  };
 
   let statusType = STATUS_TYPE_UNKNOW;
   let statusText = STATUS_TEXT_UNKNOW;
@@ -39,9 +47,7 @@ export function ShowId() {
         image={blobPhoto}
         statusText={statusText}
         statusType={statusType}
-        handleClickTakePicture={() => {
-          setShowTakePicture(true);
-        }}
+        handleClickTakePicture={handleClickTakePicture}
       />
     </>
   );

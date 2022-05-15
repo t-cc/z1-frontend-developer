@@ -17,10 +17,9 @@ const CAPTURE_OPTIONS = {
 };
 
 export const TakePicture = () => {
-  // Wee need this 2 variables because the colorIsValidated only updates every render cycle
-  const [, setShowTakePicture] = useRecoilState(showTakePictureState);
   const [, setPostResponseOk] = useRecoilState(postResponseOkState);
   const [blobPhoto, setBlobPhoto] = useRecoilState(blobPhotoState);
+  const [, setShowTakePicture] = useRecoilState(showTakePictureState);
   const [colorIsValidated, setColorIsValidated] = useRecoilState(
     colorIsValidatedState
   );
@@ -40,15 +39,16 @@ export const TakePicture = () => {
     setColorIsValidated(false);
   };
 
-  useEffect(() => {
-    setBlobPhoto("");
-  }, []);
+  const handleClickCancel = () => {
+    setShowTakePicture(false);
+    setColorIsValidated(false);
+  };
 
   useEffect(() => {
     if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
       videoRef.current.srcObject = mediaStream;
     }
-  }, [mediaStream, videoRef.current]);
+  }, [mediaStream]);
 
   useEffect(() => {
     if (colorIsValidated && blobPhoto !== "") {
@@ -59,8 +59,8 @@ export const TakePicture = () => {
   useEffect(() => {
     const delay = () => new Promise((res) => setTimeout(res, 100));
 
+    let reading = true;
     async function startCapture() {
-      let reading = true;
       while (reading) {
         const imageData = await displayAndCheckImage(videoRef, canvasRef);
         if (imageData) {
@@ -72,11 +72,14 @@ export const TakePicture = () => {
         }
       }
     }
-
     if (videoRef.current?.srcObject) {
       startCapture();
     }
-  }, [videoRef.current?.srcObject, colorIsValidated]);
+
+    return () => {
+      reading = false;
+    };
+  }, [JSON.stringify(videoRef.current?.srcObject)]);
 
   return (
     <>
@@ -85,9 +88,7 @@ export const TakePicture = () => {
         canvasRef={canvasRef}
         colorIsValidated={colorIsValidated}
         handleCanPlay={handleCanPlay}
-        handleClickCancelPicture={() => {
-          setShowTakePicture(false);
-        }}
+        handleClickCancelPicture={handleClickCancel}
       />
     </>
   );
