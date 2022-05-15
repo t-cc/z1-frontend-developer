@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="5.839">
+  <testsuite name="CameraPreview" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:08" time="1.677" tests="1">
+    <testcase classname="CameraPreview renders component and call cancel button" name="CameraPreview renders component and call cancel button" time="0.22">
+    </testcase>
+  </testsuite>
+  <testsuite name="Main" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:10" time="0.892" tests="2">
+    <testcase classname="Main renders texts" name="Main renders texts" time="0.069">
+    </testcase>
+    <testcase classname="Main calls &quot;onClick&quot; on button" name="Main calls &quot;onClick&quot; on button" time="0.016">
+    </testcase>
+  </testsuite>
+  <testsuite name="App.tsx" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:08" time="3.007" tests="3">
+    <testcase classname="App.tsx documment title" name="App.tsx documment title" time="0.125">
+    </testcase>
+    <testcase classname="App.tsx navigate to next window" name="App.tsx navigate to next window" time="0.191">
+    </testcase>
+    <testcase classname="App.tsx click cancel button" name="App.tsx click cancel button" time="0.085">
+    </testcase>
+  </testsuite>
+  <testsuite name="TakePictureButton" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:11" time="0.601" tests="2">
+    <testcase classname="TakePictureButton renders action text" name="TakePictureButton renders action text" time="0.038">
+    </testcase>
+    <testcase classname="TakePictureButton calls &quot;onClick&quot;" name="TakePictureButton calls &quot;onClick&quot;" time="0.011">
+    </testcase>
+  </testsuite>
+  <testsuite name="IdImage" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:11" time="0.657" tests="1">
+    <testcase classname="IdImage renders IdImage" name="IdImage renders IdImage" time="0.11">
+    </testcase>
+  </testsuite>
+  <testsuite name="Header" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:11" time="0.463" tests="1">
+    <testcase classname="Header renders header" name="Header renders header" time="0.033">
+    </testcase>
+  </testsuite>
+  <testsuite name="ShowId" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:12" time="0.603" tests="1">
+    <testcase classname="ShowId renders" name="ShowId renders" time="0.111">
+    </testcase>
+  </testsuite>
+  <testsuite name="ShowId" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:12" time="0.563" tests="1">
+    <testcase classname="ShowId renders" name="ShowId renders" time="0.066">
+    </testcase>
+  </testsuite>
+  <testsuite name="StatusButton" errors="0" failures="0" skipped="0" timestamp="2022-05-15T11:22:12" time="0.447" tests="1">
+    <testcase classname="StatusButton renders button and status text" name="StatusButton renders button and status text" time="0.037">
+    </testcase>
+  </testsuite>
+</testsuites>
