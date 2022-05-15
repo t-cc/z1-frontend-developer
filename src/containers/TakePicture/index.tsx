@@ -10,6 +10,7 @@ import {
   colorIsValidatedState,
 } from "../../state";
 import { sendImage } from "../../services/sendImage";
+import { ID_CHECK_PROCESS_DELAY } from "../../constants/id";
 
 const CAPTURE_OPTIONS = {
   audio: false,
@@ -57,7 +58,8 @@ export const TakePicture = () => {
   }, [colorIsValidated]);
 
   useEffect(() => {
-    const delay = () => new Promise((res) => setTimeout(res, 100));
+    const delay = () =>
+      new Promise((res) => setTimeout(res, ID_CHECK_PROCESS_DELAY));
 
     let reading = true;
     async function startCapture() {
