@@ -16,7 +16,7 @@ DEMO: 🚀 https://lively-sprinkles-23a32e.netlify.app/
 ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
 ![PRETTIER](https://img.shields.io/badge/-Prettier-1A2B34?style=for-the-badge)
 
-## 🔧 Herramientas.
+## 🔧 Tools.
 
 - [React.js](https://reactjs.org)
 - [Typescript](https://www.typescriptlang.org/)
