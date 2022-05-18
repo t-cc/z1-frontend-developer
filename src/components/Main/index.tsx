@@ -23,7 +23,7 @@ export const Main: React.FC<Props> = ({
   handleClickTakePicture,
 }) => {
   return (
-    <main>
+    <>
       <StyledHead>Scan your ID</StyledHead>
       <StyledMessage>
         Take a picture. It may take time to validate your personal information.
@@ -40,6 +40,6 @@ export const Main: React.FC<Props> = ({
           <StatusButton statusText={statusText} statusType={statusType} />
         )}
       </StyledImgWrapper>
-    </main>
+    </>
   );
 };
