@@ -5,9 +5,9 @@ export const showTakePictureState = atom<boolean>({
   default: false,
 });
 
-export const blobPhotoState = atom<string>({
+export const blobPhotoState = atom<string | undefined>({
   key: "blobPhotoState",
-  default: "",
+  default: undefined,
 });
 
 export const postResponseOkState = atom<boolean>({

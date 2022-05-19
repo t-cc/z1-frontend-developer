@@ -24,7 +24,7 @@ export function ShowId() {
   const [, setColorIsValidated] = useRecoilState(colorIsValidatedState);
 
   const handleClickTakePicture = () => {
-    setBlobPhoto("");
+    setBlobPhoto(undefined);
     setColorIsValidated(false);
     setShowTakePicture(true);
   };

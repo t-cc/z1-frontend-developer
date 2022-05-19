@@ -12,9 +12,6 @@ export const IdImage: React.FC<Props> = ({
   statusType = STATUS_TYPE_UNKNOW,
   image = IdBgDefault,
 }) => {
-  if (!image) {
-    image = IdBgDefault;
-  }
   return (
     <>
       <StyledImg src={image} statusType={statusType} />

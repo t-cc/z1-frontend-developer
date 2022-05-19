@@ -55,7 +55,7 @@ export const TakePicture = () => {
   }, [mediaStream]);
 
   useEffect(() => {
-    if (colorIsValidated && blobPhoto !== "") {
+    if (colorIsValidated && blobPhoto !== undefined) {
       handleSubmit(blobPhoto);
     }
   }, [colorIsValidated]);
