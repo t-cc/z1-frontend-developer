@@ -14,4 +14,5 @@ export const StyledButton = styled.button`
   background-color: #2f0079;
   padding: 0.5rem 1rem;
   position: absolute;
+  border: none;
 `;
