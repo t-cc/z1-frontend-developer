@@ -5,4 +5,13 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: scroll;
+}
+
+#root {
+  max-width: 40rem;
+  margin: 0 auto;
+  position: relative;
+  height: 100vh;
+  max-height: -webkit-fill-available;
 }
